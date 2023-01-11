@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StopWatch</title>
+</head>
+<body>
+    <div class = stopWatch>
+        <p id = stopWatch>00:00:00:00</p>
+        <button id = startbtn>start</button> <button id  = resetbtn>reset</button>
+    </div>
+</body>
+<style>
+    .stopWatch {
+        display: block;
+        border: 1px solid gray;
+        border-radius: 5px;
+        background-color: rgb(214, 212, 212);
+        font-size: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 600px;
+        text-align: center;
+    }
+    
+</style>
+<script>
+    var milliseconds = 0
+    var seconds = 0 
+    var minutes = 0
+    var hours = 0
+    var started = false
+
+    const interval = setInterval(TimerAdd,  10)
+
+    function TimerAdd() {
+        if (started === true) {
+            seconds -= "0"
+            minutes -= "0"
+            hours -= "0"
+            milliseconds -= "0"
+            milliseconds += 1
+            if (milliseconds === 100) {
+                milliseconds = 0
+                seconds += 1
+            } 
+            if (seconds === 60) {
+                seconds = 00
+                minutes += 1
+            } 
+            if (minutes === 60) {
+                minutes = 00     
+                hours += 1
+            }
+            if (milliseconds < 10){
+                milliseconds = "0" + milliseconds
+            }
+            if (seconds < 10){
+                seconds = "0" + seconds
+            }
+            if (minutes < 10){
+                minutes = "0" + minutes
+            }
+            if (hours < 10){
+                hours = "0" + hours
+            }
+            console.log("Second")
+            document.getElementById("stopWatch").innerText = hours + ":" + minutes + ":" + seconds + ":" + milliseconds
+        }
+    }
+    document.getElementById("startbtn").onclick = function(){
+        if (started === false) {
+            started = true
+            document.getElementById("startbtn").innerText = "stop"
+        } else if (started === true) {
+            started = false
+            document.getElementById("startbtn").innerText = "start"
+        }
+    }
+    document.getElementById("resetbtn").onclick = function(){
+        seconds = 0
+        minutes = 0
+        hours = 0
+        milliseconds = 0
+        started = false
+        document.getElementById("stopWatch").innerText = "00:00:00:00"
+        document.getElementById("startbtn").innerText = "start" 
+    }
+
+    
+
+
+</script>
+</html>
